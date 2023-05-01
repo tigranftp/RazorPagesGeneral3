@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesGeneral.Pages
 {
-
+    [IgnoreAntiforgeryToken]
     public class contactModel : PageModel
     {
 
@@ -27,7 +27,7 @@ namespace RazorPagesGeneral.Pages
         {
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
             var newContact = new Contact();
             newContact.first_name = Request.Form["first_name"];
@@ -38,6 +38,7 @@ namespace RazorPagesGeneral.Pages
             newContact.select_price = Request.Form["select_price"];
             newContact.comments = Request.Form["comments"];
             contactsService.writeContact(newContact);
+            return Content("Done!");
         }
     }
 
